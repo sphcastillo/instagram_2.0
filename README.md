@@ -11,6 +11,8 @@ ReactJS, NextJS, TailwindCSS, Firebase v9, Custom NextAuth, Recoil
 
 ## Github Repository
 
+https://github.com/sphcastillo/instagram_2.0
+
 ## Deployed Site
 
 ## More info

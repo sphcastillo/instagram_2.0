@@ -1,14 +1,18 @@
-import xw from 'xwind'
-import ButtonReact from '../components/ButtonReact'
-import ButtonStyled from '../components/ButtonStyled'
+import Head from "next/head";
+import Header from "../components/Header";
 
-const Index = () => (
-  <div css={xw`grid justify-center items-center h-screen space-y-20`}>
-    <div css={xw`space-y-20`}>
-      <ButtonReact>@emotion/react</ButtonReact>
-      <ButtonStyled>@emotion/styled</ButtonStyled>
+export default function Home(){
+  return (
+    <div>
+      <Head>
+        <title>INSTAGRAM 2.0 Build</title>
+      </Head>
+
+      <Header />
+
+      {/* Feed */}
+
+      {/* Modal */}
     </div>
-  </div>
-)
-
-export default Index
+  )
+}
