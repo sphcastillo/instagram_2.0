@@ -12,7 +12,6 @@ function Feed() {
             </section>
 
                         
-
             {/* Section */}
                 {/* Mini profile */}
                 {/* Suggestions */}
