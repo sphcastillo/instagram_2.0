@@ -1,12 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-function Story({src, username}) {
+
+function Story({img, username}) {
+
     return (
-        <div className="z-0">
+        <div className="">
             <img 
-                className="h-14 w-14 p-[1.5px] border-2 border-red-500 object-contain rounded-full cursor-pointer hover:scale-110 transition transform duration-200 ease-out"
-                src={src}
-                alt={username}
+                className="h-14 w-14 rounded-full p-[1.5px] border-red-500 border-2 object-contain cursor-pointer hover:scale-110 transition transform duration-200 ease-out"
+                src={img}
+
             />
             <p className="text-xs w-14 truncate text-center">{username}</p>
         </div>

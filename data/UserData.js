@@ -16,73 +16,73 @@ export const UserData = [
         id: 0,
         username: "_yourboydamon",
         name: "Damon",
-        src: DamonPhoto
+        avatar: DamonPhoto
     },
     {
         id: 1,
         username: "lizzy__",
         name: "Elizabeth",
-        src: elizabeth
+        avatar: elizabeth
     },
     {
         id: 2,
         username: "felixlorenzo",
         name: "Felix",
-        src: felix
+        avatar: felix
     },
     {
         id: 3,
         username: "la_gal_issa",
         name: "Issa",
-        src: issa
+        avatar: issa
     },
     {
         id: 4,
         username: "jenna_boop",
         name: "Jenna",
-        src: jenna
+        avatar: jenna
     },
     {
         id: 5,
         username: "mel_szaaaa",
         name: "Melissa",
-        src: melissa
+        avatar: melissa
     },
     {
         id: 6,
         username: "neal_the_realdeal",
         name: "Neal",
-        src: neal
+        avatar: neal
     },
     {
         id: 7,
         username: "ronny___nyc",
         name: "Ronny",
-        src: ronald
+        avatar: ronald
     },
     {
         id: 8,
         username: "rosie_rose",
         name: "Rosie",
-        src: rosie
+        avatar: rosie
     },
     {
         id: 9,
         username: "_sammy_dream",
         name: "Sammy",
-        src: sammy
+        avatar: sammy
     },
     {
         id: 10,
         username: "tifftiff",
         name: "Tiffany",
-        src: tiffany
+        avatar: tiffany
     },
     {
         id: 11,
         username: "time_for_zack",
         name: "Zachary",
-        src: zachary
+        avatar: zachary
     },
 
 ]
