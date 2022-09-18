@@ -1,4 +1,4 @@
-import damon from "../images/damon.jpeg";
+import DamonPhoto from "../images/damon.jpeg";
 import elizabeth from "../images/elizabeth.jpeg";
 import felix from "../images/felix.jpeg";
 import issa from "../images/issa.jpeg";
@@ -16,7 +16,7 @@ export const UserData = [
         id: 0,
         username: "_yourboydamon",
         name: "Damon",
-        src: damon
+        src: DamonPhoto
     },
     {
         id: 1,
