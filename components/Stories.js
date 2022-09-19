@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
-import Image from 'next/image';
+import React from 'react';
 import { UserData } from '../data/UserData';
 import Story from './Story';
 
 function Stories() {
 
-
-    console.log("UserData", UserData);
+    // console.log("UserData", UserData);
 
     return (
-        <div className="flex space-x-2 p-6 bg-white mt-8 border-gray-200 border rounded-sm overflow-x-scroll">
+        <div className="flex space-x-2 p-6 bg-white mt-8 border-gray-200 border rounded-sm overflow-x-scroll scrollbar-thin scrollbar-thumb-black">
 
             {UserData.map((profile, i) => {
                 return (

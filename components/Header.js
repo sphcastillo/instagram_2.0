@@ -58,7 +58,7 @@ function Header() {
                     <HeartIcon className="navBtn" />
 
                     <img 
-                        src="https://media-exp1.licdn.com/dms/image/C5603AQHGCdEAxQozPw/profile-displayphoto-shrink_200_200/0/1619130340048?e=2147483647&v=beta&t=1Qo95obBrz4FvDMmHxScl23fG5_4b7FtaCGK7oMAAec"
+                        src="https://www.builtbysophia.com/static/media/SophiaCircleLogo.3f2550bf.png"
                         alt="Profile Picture" 
                         className="h-10 rounded-full cursor-pointer"
                     />
