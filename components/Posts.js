@@ -5,7 +5,7 @@ const posts = [
     {
         id: "123",
         username: "sphcastillo",
-        userImg: "https://media-exp1.licdn.com/dms/image/C5603AQHGCdEAxQozPw/profile-displayphoto-shrink_200_200/0/1619130340048?e=2147483647&v=beta&t=1Qo95obBrz4FvDMmHxScl23fG5_4b7FtaCGK7oMAAec",
+        userImg: "https://www.builtbysophia.com/static/media/SophiaCircleLogo.3f2550bf.png",
         img: "https://media-exp1.licdn.com/dms/image/C5603AQHGCdEAxQozPw/profile-displayphoto-shrink_200_200/0/1619130340048?e=2147483647&v=beta&t=1Qo95obBrz4FvDMmHxScl23fG5_4b7FtaCGK7oMAAec",
         caption: "This is DOPE!"
     },
