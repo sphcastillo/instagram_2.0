@@ -29,3 +29,6 @@ const storage = getStorage();
 // in order to use this outside the firebase config file, we need to export it
 // doing an explicit export
 export { app, db, storage };
+
+// We now have our whole connection to firebase set up
+// Connection to our firebase backend
