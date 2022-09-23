@@ -5,6 +5,9 @@
 
 ## Requirements
 
+heroicons, @tailwindcss/forms, tailwind-scrollbar, tailwind-scrollbar-hide, next-auth, firebase
+
+
 ## Technologies & Methods Used
 
 ReactJS, NextJS, TailwindCSS, Firebase v9, Custom NextAuth, Recoil
