@@ -3,13 +3,61 @@ import { useRecoilState } from 'recoil';
 import { currentModalState } from '../atoms/modalAtom';
 import { Dialog, Transition } from '@headlessui/react';
 import { CameraIcon } from "@heroicons/react/outline";
+import { db, storage } from "../firebase";
+import { addDoc, collection, serverTimestamp, doc, updateDoc } from 'firebase/firestore';
+import { useSession } from "next-auth/react";
+import { ref, getDownloadURL, uploadString } from '@firebase/storage';
 
 function Modal() {
+
+    const { data: session } = useSession();
     const [open, setOpen] = useRecoilState(currentModalState);
     const filePickerRef = useRef(null); 
     const captionRef = useRef(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    // function responsible to upload post & upload to FIREBASE storage 
+    // we will make a post to FIREBASE store - we get a post ID
+    // we upload to FIREBASE Storage with that id
+    // we will get a download URL and reattach to the original post
+    const uploadPost = async () => {
+        // once the user the user clicks on the upload button, disable so you can't spam it
+        if (loading) return;
+        
+        setLoading(true);
+        // 1. Create a post and add to FIREBASE firestore 'posts' collection
+        // 2. Get the ID for the newly created post
+        // 3. Upload the image to FIREBASE storage with the post ID
+        // 4. Get a download URL from FIREBASE storage and update the original post with image
+
+        const docRef  = await addDoc(collection(db, 'posts'), {
+            username: session.user.username,
+            caption: captionRef.current.value,
+            profileImg: session.user.image,
+            // need this to have the server time zone, aka query at the same time
+            timestamp: serverTimestamp(),
+        })
+        // new created post
+        console.log("New doc added with ID: ", docRef.id);
+
+        // a bucket in FIREBASE storage that we're going to organize
+        const imageRef = ref(storage, `posts/${docRef.id}/image`);
+
+        await uploadString(imageRef, selectedFile, "data_url").then(
+            async (snapshot) => {
+                const downloadURL = await getDownloadURL(imageRef);
+                // update original doc with the new image that's stored 
+                await updateDoc(doc(db, 'posts', docRef.id), {
+                    image: downloadURL,
+                })
+            }
+        );
+
+        setOpen(false);
+        setLoading(false);
+        setSelectedFile(null);
+    }
 
     // setting variable from the picture we selected into a file that we can store on our local and then display a preview of it
     const addImageToPost = (e) => {
@@ -29,10 +77,10 @@ function Modal() {
         <Transition.Root show={open} as={Fragment} >
             <Dialog
                 as="div"
-                className="fixed z-10 inset-0 overflow-auto"
+                className="fixed z-10 inset-0 overflow-y-auto"
                 onClose={setOpen}
             >
-                <div className="flex items-end justify-center min-h-[800px] sm:min-h-screen pt-4 px-4 pb-20 text-center">
+                <div className="flex items-end justify-center min-h-[800px] sm:min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -101,6 +149,7 @@ function Modal() {
                                         <input 
                                             className="border-none focus:ring-0 w-full text-center"
                                             type="text"
+                                            ref={captionRef}
                                             placeholder="Please enter a caption..."
                                         />
                                     </div>
@@ -110,6 +159,8 @@ function Modal() {
                             <div className="mt-5 sm:mt-6">
                                 <button
                                     type="button"
+                                    onClick={uploadPost}
+                                    disabled={!selectedFile}
                                     className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm disabled:bg-gray-300 disabled:cursor-not-allowed hover:disabled:bg-gray-300"
                                     >
                                     {loading ? "Uploading..." : "Upload Post"}

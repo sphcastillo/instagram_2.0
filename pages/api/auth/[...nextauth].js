@@ -31,7 +31,7 @@ export default  NextAuth({
             // join it again without the space
                 .join("")
             // lowercase it
-                .toLocaleLowerCase();
+                .toLowerCase();
 
                 // ex. Sophia Castillo ==> sophiacastillo
                 session.user.uid = token.sub;
