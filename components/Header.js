@@ -11,7 +11,7 @@ import { HomeIcon } from "@heroicons/react/solid";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
-import { modalState } from '../atoms/modalAtom';
+import { currentModalState } from '../atoms/modalAtom';
 
 function Header() {
     // after we've wrapped our entire app in the user session provider
@@ -21,7 +21,7 @@ function Header() {
     // use Next.js built-in router
     const router = useRouter();
 
-    const [open, setOpen] = useRecoilState(modalState);
+    const [open, setOpen] = useRecoilState(currentModalState);
     return (
         <div className="shadow-sm border-b bg-white sticky top-0 z-50">
             <div className="flex justify-between p-2 max-w-6xl mx-5 xl:mx-auto">
