@@ -5,7 +5,7 @@
 
 ## Requirements
 
-heroicons, @tailwindcss/forms, tailwind-scrollbar, tailwind-scrollbar-hide, next-auth, firebase
+heroicons, @tailwindcss/forms, tailwind-scrollbar, tailwind-scrollbar-hide, next-auth, firebase, recoil, headless UI
 
 
 ## Technologies & Methods Used
