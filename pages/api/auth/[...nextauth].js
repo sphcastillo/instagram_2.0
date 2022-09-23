@@ -20,5 +20,23 @@ export default  NextAuth({
 
     pages: {
         signIn: "/auth/signin",
+    },
+    // from Google: email, image, name
+    // upgrading the callback when you sign in : enhance the user's object
+    callbacks: {
+        async session({ session, token, user }){
+            session.user.username = session.user.name
+            // spilt where there is a space
+                .split(" ")
+            // join it again without the space
+                .join("")
+            // lowercase it
+                .toLocaleLowerCase();
+
+                // ex. Sophia Castillo ==> sophiacastillo
+                session.user.uid = token.sub;
+                return session;
+
+        }
     }
 })
