@@ -9,8 +9,9 @@ import {
 } from '@heroicons/react/outline';
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import { useSession } from 'next-auth/react';
-import { addDoc, collection, query, onSnapshot, orderBy, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import Moment from "react-moment";
 
 function Post({ id, username, userImg, img, caption }) {
     const { data: session } = useSession();
@@ -23,21 +24,36 @@ function Post({ id, username, userImg, img, caption }) {
         () =>
             onSnapshot(
                 query(
-                    collection(db, 'posts', id, 'comments'),
-                    orderBy('timestamp', 'desc')
+                    collection(db, "posts",  id, "comments"),
+                    orderBy("timestamp", "desc")
                 ),
                 (snapshot) => setComments(snapshot.docs)
-            ),
-        [db]
+            ), [db, id]
     );
 
     useEffect(
         () => 
-            onSnapshot(collection(db, "post", id, "likes"), 
+            onSnapshot(collection(db, "posts", id, "likes"), 
                 (snapshot) => setLikes(snapshot.docs)
                 ),
-        []
+        [db, id]
     );
+
+    useEffect(() => {
+        setHasLiked(
+            likes.findIndex((like) => (like.id === session?.user?.uid) !== -1)
+        )
+    }, [likes]);
+
+    const likePost = async () => {
+        if (hasLiked) {
+            await deleteDoc(doc(db, 'posts', id, "likes", session.user.id));
+        } else {
+            await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
+                username: session.user.username,
+            });
+        }
+    };
 
     const sendComment = async (e) => {
         e.preventDefault();
@@ -80,7 +96,10 @@ function Post({ id, username, userImg, img, caption }) {
             {session && (
                 <div className="flex justify-between px-4 pt-4">
                     <div className="flex space-x-4">
-                        <HeartIcon className="btn" />
+                        <HeartIcon 
+                            className="btn" 
+                            onClick={likePost}
+                        />
                         <ChatIcon className="btn" />
                         <PaperAirplaneIcon className="btn" />
                     </div>
@@ -95,45 +114,27 @@ function Post({ id, username, userImg, img, caption }) {
             </p>
 
             {/* comments */}
-
-            {comments.length > 0 && (
+            {comments.length > 0  &&  (
                 <div className="ml-10 h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin">
-                    {comments.map((comment) => {
-                        <div className="flex items-center space-x-2 mb-3" key={comment.id}>
+                    {comments.map((comment) => (
+                        <div key={comment.id} className="flex items-center space-x-2 mb-3">
                             <img
-                                src={comment.data().image} 
+                                src={comment.data().userImage}
                                 className="h-7 rounded-full"
                                 alt=""
                             />
-                            <p>HELLO!</p>
-                        </div>
-                    })}
-                </div>
-            )}
-
-            {/* {session && 
-                comments.length > 0 && (
-                <div className="ml-10 h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin">
-                    {comments.map((comment) => {
-                        <div 
-                            key={comment.id}
-                            className="flex items-center space-x-2 mb-3"
-                        >
-                            <img 
-                                src={comment.data().userImage} 
-                                alt="" 
-                                className="h-7 rounded-full"
-                            />
                             <p className="text-sm flex-1">
-                                <span className="font-bold">{comment.data().username}
-                                </span>{" "}
+                                <span className="font-bold">{comment.data().username}</span>{" "}
                                 {comment.data().comment}
                             </p>
-                        </div>
-                    })}
-                </div>
-            )} */}
 
+                            <Moment className="pr-5 text-xs" fromNow>
+                                {comment.data().timestamp?.toDate()}
+                            </Moment>
+                        </div>
+                    ))}
+                </div>
+            )}
             {/* input box */}
             
             {session && (
