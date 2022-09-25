@@ -18,6 +18,8 @@ https://github.com/sphcastillo/instagram_2.0
 
 ## Deployed Site
 
+http://www.blackbloomflowers.com
+
 ## More info
 
 Author: Sophia Castillo,
