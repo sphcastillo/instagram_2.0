@@ -18,7 +18,7 @@ https://github.com/sphcastillo/instagram_2.0
 
 ## Deployed Site
 
-http://www.blackbloomflowers.com
+https://instagramclone-sooty.vercel.app/
 
 ## More info
 
