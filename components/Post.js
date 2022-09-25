@@ -39,21 +39,24 @@ function Post({ id, username, userImg, img, caption }) {
         [db, id]
     );
 
-    useEffect(() => {
+    useEffect(() => 
         setHasLiked(
-            likes.findIndex((like) => (like.id === session?.user?.uid) !== -1)
-        )
-    }, [likes]);
+            likes.findIndex((like) => like.id === session?.user?.uid) !== -1
+        ),
+    [likes]
+    );
 
     const likePost = async () => {
         if (hasLiked) {
-            await deleteDoc(doc(db, 'posts', id, "likes", session.user.id));
+            await deleteDoc(doc(db, 'posts', id, "likes", session.user.uid));
         } else {
             await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
                 username: session.user.username,
             });
         }
     };
+
+    // console.log("HAS LIKED: ", hasLiked);
 
     const sendComment = async (e) => {
         e.preventDefault();
@@ -70,7 +73,7 @@ function Post({ id, username, userImg, img, caption }) {
         })
     }
 
-    console.log("comments:", comments);
+    // console.log("comments:", comments);
     return (
         <div className="bg-white my-7 border rounded-sm">
 
@@ -96,10 +99,15 @@ function Post({ id, username, userImg, img, caption }) {
             {session && (
                 <div className="flex justify-between px-4 pt-4">
                     <div className="flex space-x-4">
-                        <HeartIcon 
+                        {hasLiked ? (
+                            <HeartIconFilled onClick={likePost} className="btn text-red-500" />
+                        ) : (
+                            <HeartIcon 
                             className="btn" 
                             onClick={likePost}
-                        />
+                            />
+                        )}
+
                         <ChatIcon className="btn" />
                         <PaperAirplaneIcon className="btn" />
                     </div>
