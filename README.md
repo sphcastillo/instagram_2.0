@@ -2,6 +2,7 @@
 
 ## Description
 
+Our Instagram clone is connected to Google Firebase. It allows users to create an account, login, and post pictures. Users can also like and comment on other users' posts.
 
 ## Requirements
 
