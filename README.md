@@ -36,9 +36,9 @@ LinkedIn: https://www.linkedin.com/in/sophia-castillo-b89124133/
 
 <img src="images/IMGsamples/instagramclone1.png" />
 
-<img src="images/IMGsamples/" />
+<img src="images/IMGsamples/instagramclone2.png" />
 
-<img src="images/IMGsamples/" />
+<img src="images/IMGsamples/instagramclone3.png" />
 
 <img src="images/IMGsamples/instagramclone4.png" />
 
